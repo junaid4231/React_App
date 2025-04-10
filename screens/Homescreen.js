@@ -1,18 +1,18 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       {/* Top Section (Header) */}
       <View style={styles.header}>
         <Text style={styles.title}>Quran</Text>
-        <Image
+        {/* <Image
           source={require("../assets/quranicon.png")}
           style={styles.quranIcon}
-        />
+        /> */}
         <Text style={styles.lastRead}>Last Read</Text>
         <Text style={styles.surah}>Al-Faatiha</Text>
         <Text style={styles.verse}>Verse No. 7</Text>
@@ -24,15 +24,27 @@ export default function HomeScreen() {
         <Text style={styles.featuresTitle}>Features</Text>
 
         <View style={styles.grid}>
-          <View style={styles.card}>
-            <Ionicons name="book-outline" size={40} color="black" />
-            <Text style={styles.cardText}>Read Quran</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Subscreen");
+            }}
+          >
+            <View style={styles.card}>
+              <Ionicons name="book-outline" size={40} color="black" />
+              <Text style={styles.cardText}>Read Quran</Text>
+            </View>
+          </TouchableOpacity>
 
-          <View style={styles.card}>
-            <Ionicons name="search-outline" size={40} color="black" />
-            <Text style={styles.cardText}>Search</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Search");
+            }}
+          >
+            <View style={styles.card}>
+              <Ionicons name="search-outline" size={40} color="black" />
+              <Text style={styles.cardText}>Search</Text>
+            </View>
+          </TouchableOpacity>
 
           <View style={styles.card}>
             <Ionicons name="bookmark-outline" size={40} color="black" />
@@ -57,8 +69,8 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#3b5998",
   },
-  title: { fontSize: 24, fontWeight: "bold", color: "white" },
-  quranIcon: { width: 80, height: 60, marginVertical: 10 },
+  title: { fontSize: 30, fontWeight: "bold", color: "white" },
+  quranIcon: { width: 50, height: 50, marginVertical: 10 },
   lastRead: { fontSize: 16, color: "white" },
   surah: { fontSize: 22, fontWeight: "bold", color: "white" },
   verse: { fontSize: 16, color: "white" },
